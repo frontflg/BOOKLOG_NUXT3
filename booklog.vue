@@ -3,7 +3,7 @@
     <v-container>
       <v-snackbar
         v-model="alertFlg"
-        color="green"
+        color="red"
         style="white-space: pre-wrap;"
         :top="true"
       >
@@ -86,8 +86,13 @@
 export default {
   name: 'BooklogList',
   async asyncData ({ $axios }) {
-    const lists = await $axios.$get('http://localhost:5000')
-    return { lists }
+    try {
+      const lists = await $axios.$get('http://localhost:5000')
+      return { lists }
+    } catch (e) {
+      this.alertFlg = true
+      this.alertMessage = e.errorCode + ':データ取得でエラーが発生しました'
+    }
   },
   data () {
     return {
@@ -139,28 +144,26 @@ export default {
   },
   methods: {
     downloadData () {
-      let csv = 'ISBN13,書籍名,著者,出版社,価格,分類,発行日\n'
+      let csv = 'ISBN13,ISBN10,書籍名,著者,出版社,価格,分類,発行日,取得日,読了日,所有,図書館,内容,感想,状態,画像\n'
       this.lists.forEach(function (el) {
-        csv += el.ISBN13 + ',' + el.BookName + ',' + el.Author + ',' +
-               el.Publisher + ',' + el.Purchase + ',' +
-               el.Genre + ',' + el.GDATE + '\n'
+        csv += el.ISBN13 + ',' + el.ISBN10 + ',' +el.BookName + ',' + el.Author + ',' + el.Publisher + ',' + el.Purchase + ',' +
+               el.Genre + ',' + el.GDATE + ',' + el.GetDate + ',' + el.ReadDate + ',' + el.Ownership + ',' + el.Library + ',' +
+               el.Overview + ',' + el.Impressions + ',' + el.State + ',' + el.CoverImg + '\n'
       })
       const anchor = document.createElement('a')
       anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv)
       anchor.target = '_blank'
       anchor.download = 'DATA_LIST_' + new Date().toISOString().substr(0, 10) + '.csv'
       anchor.click()
-      this.alertFlg = true
-      this.alertMessage = 'ダウンロード実行しました'
     }
   }
 }
 </script>
 
 <style>
-th {
+table tr:first-child th {
   color: #fff;
-  background-color: rgb(128, 152, 226);
+  background-color: #90CAF9;
 }
 .v-data-table td {
   background: #f0f8ff;
