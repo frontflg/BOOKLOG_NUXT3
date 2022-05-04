@@ -16,7 +16,7 @@ app.get('/', function (req, res) { // app.get...(expressの構文)、req=request
   res.set({ 'Access-Control-Allow-Origin': '*' }); // この記載により、※1：CORSを許可する
   connection.query('select *,DATE_FORMAT(IssueDate,"%Y-%m-%d") AS GDATE,ROW_NUMBER() OVER (ORDER BY ISBN13) AS line from booklog', function (error, results) { // booklogテーブルから全てのカラムを取得する
     if (error) throw error; // エラー処理
-    res.send(results);      // results[0]により、一番目のデータを返答する
+    res.send(results);      // resultsにより、検索データを返答する
   });
 });
 
