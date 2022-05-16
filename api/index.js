@@ -92,7 +92,7 @@ app.post('/update', function (req, res) { // app.post...(expressの構文)、req
   res.set({ 'Access-Control-Allow-Origin': '*' }); // この記載により、※1：CORSを許可する
   connection.query(sql,[isbn10, bookName, author, publisher, genre, issueDate, getDate, readDate,
                 ownership, purchase, library, overview, impress, state, coverImg, isbn13],
-                function (error, results) { // booklogテーブルから指定の行を削除取得する
+                function (error, results) { // booklogテーブルから指定の行を更新する
     if (error) {
       throw error; // エラー処理
     } else {
