@@ -1,5 +1,5 @@
 <template>
-  <dev>
+  <div>
     <v-container>
       <v-snackbar
         v-model="alertFlg"
@@ -301,7 +301,7 @@
         </v-row>
       </v-col>
     </v-row>
-  </dev>
+  </div>
 </template>
 
 <script>
