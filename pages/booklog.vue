@@ -15,17 +15,17 @@
         </tr></thead>
       <tbody>
         <tr v-for="(book,i) in books" :key="book.isbn13">
-          <td width= "25px" align="right">{{ i + 1 }}　</td>
-          <td width="130px">{{ book.isbn13 }}　</td>
-          <td width="360px">{{ book.bookname }}</td>
-          <td width="220px">{{ book.author }}</td>
-          <td width="150px">{{ book.publisher }}</td>
-          <td v-if="book.purchase > 0" width= "60px">\{{ book.purchase }}-</td>
-          <td v-if="book.purchase == 0" width= "60px">図書館</td>
-          <td v-if="book.purchase == null" width= "60px">　</td>
+          <td align="right">{{ i + 1 }}　</td>
+          <td>{{ book.isbn13 }}　</td>
+          <td>{{ book.bookname }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.publisher }}</td>
+          <td v-if="book.purchase > 0">\{{ book.purchase }}-</td>
+          <td v-if="book.purchase == 0">図書館</td>
+          <td v-if="book.purchase == null">　</td>
           <td>{{ book.genre }}</td>
-          <td v-if="book.getdate !== null" width="110px">{{ book.getdate.slice(0,10) }}</td>
-          <td v-if="book.getdate == null" width="110px">　</td>
+          <td v-if="book.getdate !== null">{{ book.getdate.slice(0,10) }}</td>
+          <td v-if="book.getdate == null>　</td>
         </tr>
       </tbody>
     </table>
