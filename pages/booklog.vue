@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <p class="mb-10">読書履歴</p>
+    <div style="height:550px; overflow-y:scroll;">
     <table>
       <thead>
         <tr>
@@ -11,7 +12,7 @@
           <th width="151px" align="left">出版社</th>
           <th width="81px"  align="left">&nbsp;価格</th>
           <th width="151px" align="left">分類</th>
-          <th width="111px" align="left">&nbsp;発行日</th>
+          <th width="116px" align="left">&nbsp;発行日</th>
         </tr></thead>
       <tbody>
         <tr v-for="(book,i) in books" :key="book.isbn13">
@@ -29,6 +30,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </v-app>
 </template>
 
