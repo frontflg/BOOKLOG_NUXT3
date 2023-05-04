@@ -28,6 +28,11 @@ export default defineEventHandler(async (e) => {
 
     let temp = {};
     try {
+      if (body.mode === 'find') {
+        temp = await prisma.booklog.findUnique({
+          where: { isbn13: body.isbn13 },
+        });
+      }
       if (body.mode === 'create') {
         temp = await prisma.booklog.create({
           data: body.data,
