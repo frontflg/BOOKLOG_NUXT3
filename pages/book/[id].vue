@@ -13,7 +13,7 @@
       <tr><th>取得日</th><td><div v-if="books.getdate !== null">&nbsp;{{ books.getdate.slice(0,10) }}</div></td></tr>
       <tr><th>読了日</th><td><div v-if="books.readdate !== null">&nbsp;{{ books.readdate.slice(0,10) }}</div></td></tr>
       <tr><th>所　有</th><td><div v-if="books.ownership == '1'">&nbsp;所有</div></td></tr>
-      <tr><th>価　格</th><td>&nbsp;\{{ books.purchase }}-</td></tr>
+      <tr><th>価　格</th><td><div v-if="books.purchase == 0">&nbsp;図書館</div><div v-if="books.purchase !== 0">&nbsp;\{{ books.purchase }}-</div></td></tr>
       <tr><th>取得元</th><td>&nbsp;{{ books.library }}</td></tr>
       <tr><th>概　要</th><td>&nbsp;{{ books.overview }}</td></tr>
       <tr><th>感　想</th><td>&nbsp;{{ books.impressions }}</td></tr>
