@@ -16,7 +16,7 @@
       <tbody>
         <tr v-for="(book,i) in books" :key="book.isbn13">
           <td align="right">{{ i + 1 }}　</td>
-          <td>{{ book.isbn13 }}　</td>
+          <td><NuxtLink :to="`/book/${book.isbn13}`">{{ book.isbn13 }}</NuxtLink>　</td>
           <td>{{ book.bookname }}</td>
           <td>{{ book.author }}</td>
           <td>{{ book.publisher }}</td>
@@ -24,8 +24,8 @@
           <td v-if="book.purchase == 0">図書館</td>
           <td v-if="book.purchase == null">　</td>
           <td>{{ book.genre }}</td>
-          <td v-if="book.getdate !== null">{{ book.getdate.slice(0,10) }}</td>
-          <td v-if="book.getdate == null>　</td>
+          <td v-if="book.issuedate !== null">{{ book.issuedate.slice(0,10) }}</td>
+          <td v-if="book.issuedate == null">　</td>
         </tr>
       </tbody>
     </table>
