@@ -35,5 +35,4 @@
 <style>
   th{ color:#fff; background:#005ab3; position:sticky; top:0; }
   table tr:nth-child(odd){ background:#e6f2ff; }
-  tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
 </style>
