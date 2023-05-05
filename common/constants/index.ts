@@ -5,6 +5,11 @@ export const NAVIGATION_ITEMS = [
     icon: 'mdi-clipboard-text'
   },
   {
+    title: 'BookCover',
+    path: '/bookimgs',
+    icon: 'mdi-clipboard-text'
+  },
+  {
     title: 'Hello',
     path: '/hello',
     icon: 'mdi-human-greeting-variant'
