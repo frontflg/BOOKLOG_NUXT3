@@ -1,6 +1,13 @@
 <template>
   <div>
-    <p class="mb-4">Hey!</p>
-    <v-btn color="primary">Primary</v-btn>
+    <p class="header">INDEX PAGE</p>
+    <v-btn nuxt to='/booklog' color="primary">BOOKLOG</v-btn>
   </div>
 </template>
+
+<style scoped>
+.header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+}
+</style>
