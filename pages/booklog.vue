@@ -17,7 +17,7 @@
       <tbody>
         <tr v-for="(book,i) in books" :key="book.isbn13">
           <td align="right">{{ i + 1 }}&nbsp;</td>
-          <td><NuxtLink :to="`/book/${book.isbn13}`">&nbsp;{{ book.isbn13 }}</NuxtLink>&nbsp;</td>
+          <td><NuxtLink event="" :to="`/book/${book.isbn13}`">&nbsp;{{ book.isbn13 }}</NuxtLink>&nbsp;</td>
           <td>{{ book.bookname }}</td>
           <td>{{ book.author }}</td>
           <td>{{ book.publisher }}</td>
