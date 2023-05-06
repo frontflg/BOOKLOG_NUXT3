@@ -2,6 +2,7 @@
 読書履歴管理システムのNuxt3.js化
 
 【インストール手順】（一例：参考）
+
 % npx nuxi init nuxt3-vuetify3
 
 % cd nuxt3-vuetify3
