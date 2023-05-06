@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <p class="mb-10">読書履歴（{{ book.isbn13 }}）</p>
+    <p class="mb-10">読書履歴（{{ book.isbn13 }}）　<v-btn nuxt :to="`update/${book.isbn13}`" color="primary">変更</v-btn></p>
     <table>
       <tr><th width="75">ISBN13</th><td width="600">&nbsp;{{ book.isbn13 }}</td><th width="300">表　紙</th></tr>
       <tr><th>ISBN10</th><td>&nbsp;{{ book.isbn10 }}</td>
@@ -36,3 +36,4 @@
   table tr:nth-child(odd){ background:#e6f2ff; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
 </style>
+
