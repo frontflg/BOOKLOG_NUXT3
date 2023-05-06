@@ -61,7 +61,7 @@ export default defineEventHandler(async (e) => {
     let temp = {};
     if (body.mode === 'update') {
       temp = await prisma.booklog.update({
-        where: { isbn13: body.targetId },
+        where: { isbn13: body.isbn13 },
         data: body.data,
       });
     }
@@ -83,7 +83,7 @@ export default defineEventHandler(async (e) => {
     let temp = {};
     if (body.mode === 'delete') {
       temp = await prisma.booklog.delete({
-        where: { isbn13: body.targetId },
+        where: { isbn13: body.isbn13 },
       });
     }
 
