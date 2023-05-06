@@ -3,14 +3,23 @@
 
 【インストール手順】（一例：参考）
 % npx nuxi init nuxt3-vuetify3
+
 % cd nuxt3-vuetify3
+
 % npm install
+
 % npm install -D vuetify@next sass vite-plugin-vuetify
+
 % npm install -D @mdi/js
+
 % npm install prisma
+
 % npx prisma init
+
 % npx prisma migrate dev
+
 % npm_run_dev
+
 % npx prisma studio
 
 【問題点】
