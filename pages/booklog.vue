@@ -5,7 +5,7 @@
     <table>
       <thead>
         <tr>
-          <th width= "26px">No.</th>
+          <th width="26px">No.</th>
           <th width="131px">&nbsp;ISBN13</th>
           <th width="361px" align="left">書籍名</th>
           <th width="221px" align="left">著者</th>
