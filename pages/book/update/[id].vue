@@ -117,7 +117,6 @@
 
 <script setup>
   const route = useRoute();
-
   const id = route.params.id;
   const { data: book, pending, refresh } = useFetch('/api/booklog', {
     method: 'POST',
@@ -130,20 +129,36 @@
     },
   });
   const input = ref({
-    isbn10:      book.isbn10,
-    genre:       book.genre,
-    bookname:    book.bookname,
-    author:      book.author,
-    publisher:   book.publisher,
-    state:       book.state,
-    issuedate:   book.issuedate,
-    getdate:     book.getdate,
-    readdate:    book.readdate,
-    ownership:   book.ownership,
-    purchase:    book.purchase,
-    library:     book.library,
-    overview:    book.overview,
-    impressions: book.impressions,
+    isbn10:      '',
+    genre:       '',
+    bookname:    '',
+    author:      '',
+    publisher:   '',
+    state:       '',
+    issuedate:   '',
+    getdate:     '',
+    readdate:    '',
+    ownership:   '',
+    purchase:    '',
+    library:     '',
+    overview:    '',
+    impressions: '',
+  });
+  watch(book, () => {
+    input.isbn10.value      = book.isbn10;
+    input.genre.value       = book.genre;
+    input.bookname.value    = book.bookname;
+    input.author.value      = book.author;
+    input.publisher.value   = book.publisher;
+    input.state.value       = book.state;
+    input.issuedate.value   = book.issuedate;
+    input.getdate.value     = book.getdate;
+    input.readdate.value    = book.readdate;
+    input.ownership.value   = book.ownership;
+    input.purchase.value    = book.purchase;
+    input.library.value     = book.library;
+    input.overview.value    = book.overview;
+    input.impressions.value = book.impressions;
   });
 </script>
 
