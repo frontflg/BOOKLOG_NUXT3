@@ -14,7 +14,7 @@
         >
           <v-card-actions class="mb-5">
             <NuxtLink event="" :to="`/book/${book.isbn13}`" @click.native="onClick">
-              <img width="150" event="" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" alt="`${book.isbn13}`" />
+              <img width="150" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" alt="`${book.isbn13}`" />
             </NuxtLink>
           </v-card-actions>
         </v-card>
