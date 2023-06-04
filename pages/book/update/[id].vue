@@ -3,7 +3,7 @@
     Loading ...
   </div>
   <div v-else>
-    <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;<v-btn @click="refresh">再読込</v-btn></p>
+    <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;<v-btn @click="refresh">再読込</v-btn>　<v-btn nuxt :to="`../${book.isbn13}`" color="secondary">戻る</v-btn>　<v-btn v-on:click="myFunction" color="warning">更新</v-btn></p>
     <table>
       <tr height="40px">
         <th width="75">ISBN13</th><td width="160">&nbsp;&nbsp;&nbsp;{{ book.isbn13 }}</td>
@@ -147,22 +147,26 @@
     overview:    '',
     impressions: '',
   });
+  // 非同期検索の取得値がセット出来ない(タイミング)
   watchEffect(book, () => {
-    input.isbn10.value      = book.isbn10;
-    input.genre.value       = book.genre;
-    input.bookname.value    = book.bookname;
-    input.author.value      = book.author;
-    input.publisher.value   = book.publisher;
-    input.state.value       = book.state;
-    input.issuedate.value   = book.issuedate;
-    input.getdate.value     = book.getdate;
-    input.readdate.value    = book.readdate;
-    input.ownership.value   = book.ownership;
-    input.purchase.value    = book.purchase;
-    input.library.value     = book.library;
-    input.overview.value    = book.overview;
-    input.impressions.value = book.impressions;
+    input.isbn10.value      = book.value.isbn10;
+    input.genre.value       = book.value.genre;
+    input.bookname.value    = book.value.bookname;
+    input.author.value      = book.value.author;
+    input.publisher.value   = book.value.publisher;
+    input.state.value       = book.value.state;
+    input.issuedate.value   = book.value.issuedate;
+    input.getdate.value     = book.value.getdate;
+    input.readdate.value    = book.value.readdate;
+    input.ownership.value   = book.value.ownership;
+    input.purchase.value    = book.value.purchase;
+    input.library.value     = book.value.library;
+    input.overview.value    = book.value.overview;
+    input.impressions.value = book.value.impressions;
   });
+  const myFunction = () => {
+    window.confirm('更新機能は未実装：' + input.author);
+  };
 </script>
 
 <style>
