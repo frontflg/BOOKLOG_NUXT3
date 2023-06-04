@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <p class="mb-10">読書履歴（{{ book.isbn13 }}）　<v-btn nuxt :to="`update/${book.isbn13}`" color="primary">変更</v-btn></p>
+    <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;
+      <v-btn nuxt :to="`update/${book.isbn13}`" color="primary">変更</v-btn>&nbsp;&nbsp;
+      <v-btn v-on:click="delBook" color="error">削除</v-btn></p>
     <table>
       <tr><th width="75">ISBN13</th><td width="600">&nbsp;{{ book.isbn13 }}</td><th width="300">表　紙</th></tr>
       <tr><th>ISBN10</th><td>&nbsp;{{ book.isbn10 }}</td>
@@ -25,10 +27,25 @@
 <script setup>
   const route = useRoute();
   const id = route.params.id;
-  const { data: book, refresh } = useFetch('/api/booklog', {
+  const { data: book, refresh } = useLazyFetch('/api/booklog', {
     method: 'POST',
     body: { mode: 'find', isbn13: id },
   });
+  const delBook = () => {
+    window.confirm('削除機能は未実装：' + id);
+ // const data = useFetch('/api/booklog', {
+ //   method: 'DELETE',
+ //   body: { mode: 'delete', targetId: id },
+ //   async onResponse({ request, response, options }) {
+ //     console.log('[fetch response]', request, response.status)
+ //     for (const header of response.headers.entries()) {
+ //       console.log('HEADER', header)
+ //     }
+ // })
+ // await refreshNuxtData(); // データのリフレッシュ
+ // alert('削除されました：' + id);
+ // router.push('/booklog');
+  };
 </script>
 
 <style>
@@ -36,4 +53,3 @@
   table tr:nth-child(odd){ background:#e6f2ff; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
 </style>
-
