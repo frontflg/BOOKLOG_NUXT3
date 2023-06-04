@@ -3,7 +3,10 @@
     Loading ...
   </div>
   <div v-else>
-    <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;<v-btn @click="refresh">再読込</v-btn>　<v-btn nuxt :to="`../${book.isbn13}`" color="secondary">戻る</v-btn>　<v-btn v-on:click="myFunction" color="warning">更新</v-btn></p>
+    <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;
+      <v-btn @click="refresh">再読込</v-btn>&nbsp;&nbsp;
+      <v-btn nuxt :to="`../${book.isbn13}`" color="secondary">戻る</v-btn>&nbsp;&nbsp;
+      <v-btn v-on:click="updBook" color="warning">更新</v-btn></p>
     <table>
       <tr height="40px">
         <th width="75">ISBN13</th><td width="160">&nbsp;&nbsp;&nbsp;{{ book.isbn13 }}</td>
@@ -164,8 +167,31 @@
     input.overview.value    = book.value.overview;
     input.impressions.value = book.value.impressions;
   });
-  const myFunction = () => {
+  const updBook = () => {
     window.confirm('更新機能は未実装：' + input.author);
+ // const data = useFetch('/api/booklog', {
+ //   method: 'PUT',                       // ※PUTであることに注意
+ //   body: { mode:        'update',
+ //           targetId:    id,
+ //           isbn10:      input.isbn10,
+ //           genre:       input.genre,
+ //           bookname:    input.bookname,
+ //           author:      input.author,
+ //           publisher:   input.publisher,
+ //           state:       input.state,
+ //           issuedate:   input.issuedate,
+ //           getdate:     input.getdate,
+ //           readdate:    input.readdate,
+ //           ownership:   input.ownership,
+ //           purchase:    input.purchase,
+ //           library:     input.library,
+ //           overview:    input.overview,
+ //           impressions: input.impressions,
+ //         },
+ // });
+ // await refreshNuxtData(); // データのリフレッシュ
+ // alert('更新されました：' + id);
+ // return data;             // awaitしてるので何か返してあげる
   };
 </script>
 
