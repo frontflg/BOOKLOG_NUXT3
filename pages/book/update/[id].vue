@@ -54,7 +54,7 @@
           <div v-if="`${book.issuedate}` !== null">
             <v-text-field clearable density="compact" hide-details="auto" v-model="input.issuedate" :label="`${book.issuedate}`.slice(0,10)"></v-text-field>
           </div>
-            <div v-if="`${book.issuedate}`  == null">
+            <div v-else>
           <v-text-field clearable density="compact" hide-details="auto" v-model="input.issuedate"></v-text-field>
           </div>
         </td>
@@ -63,7 +63,7 @@
           <div v-if="`${book.getdate}` !== null">
             <v-text-field clearable density="compact" hide-details="auto" v-model="input.getdate" :label="`${book.getdate}`.slice(0,10)"></v-text-field>
           </div>
-          <div v-if="`${book.getdate}`  == null">
+          <div v-else>
             <v-text-field clearable density="compact" hide-details="auto" v-model="input.getdate"></v-text-field>
           </div>
         </td>
@@ -72,7 +72,7 @@
           <div v-if="`${book.readdate}` !== null">
             <v-text-field clearable density="compact" hide-details="auto" v-model="input.readdate" :label="`${book.readdate}`.slice(0,10)"></v-text-field>
           </div>
-          <div v-if="`${book.readdate}`  == null">
+          <div v-else>
             <v-text-field clearable density="compact" hide-details="auto" v-model="input.readdate"></v-text-field>
           </div>
         </td>
@@ -80,8 +80,11 @@
       <tr height="40px">
         <th>所　有</th>
         <td>
-          <div style="padding-left: 20px;">
-            <v-checkbox density="compact" v-model="input.ownership" color="indigo" label="&nbsp;&nbsp;所有" v-bind:true-value="1" hide-details></v-checkbox>
+          <div v-if="`${book.ownership}` == 1" style="padding-left: 20px;">
+            <v-checkbox density="compact" v-model="input.ownership" color="indigo" :label="`&nbsp;&nbsp;所有：${book.ownership}`" v-bind:true-value="1" hide-details></v-checkbox>
+          </div>
+          <div v-else style="padding-left: 20px;">
+            <v-checkbox density="compact" v-model="input.ownership" color="indigo" :label="`&nbsp;&nbsp;非所有：${book.ownership}`" v-bind:true-value="1" hide-details></v-checkbox>
           </div>
         </td>
         <th>価　格</th>
@@ -144,7 +147,7 @@
     overview:    '',
     impressions: '',
   });
-  watch(book, () => {
+  watchEffect(book, () => {
     input.isbn10.value      = book.isbn10;
     input.genre.value       = book.genre;
     input.bookname.value    = book.bookname;
