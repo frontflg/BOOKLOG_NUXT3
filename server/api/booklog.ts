@@ -35,21 +35,23 @@ export default defineEventHandler(async (e) => {
       }
       if (body.mode === 'create') {
         temp = await prisma.booklog.create({
-          isbn13:      body.isbn13,
-          isbn10:      body.isbn10,
-          genre:       body.genre,
-          bookname:    body.bookname,
-          author:      body.author,
-          publisher:   body.publisher,
-          state:       body.state,
-          issuedate:   body.issuedate,
-          getdate:     body.getdate,
-          readdate:    body.readdate,
-          ownership:   body.ownership,
-          purchase:    body.purchase,
-          library:     body.library,
-          overview:    body.overview,
-          impressions: body.impressions,
+          data: {
+            isbn13:      body.isbn13,
+            isbn10:      body.isbn10,
+            genre:       body.genre,
+            bookname:    body.bookname,
+            author:      body.author,
+            publisher:   body.publisher,
+            state:       body.state,
+            issuedate:   body.issuedate,
+            getdate:     body.getdate,
+            readdate:    body.readdate,
+            ownership:   body.ownership,
+            purchase:    body.purchase,
+            library:     body.library,
+            overview:    body.overview,
+            impressions: body.impressions,
+          },
         });
       }
     } catch (error) {
@@ -75,21 +77,25 @@ export default defineEventHandler(async (e) => {
     let temp = {};
     if (body.mode === 'update') {
       temp = await prisma.booklog.update({
-        where:     { isbn13: body.targetId },
-        isbn10:      body.isbn10,
-        genre:       body.genre,
-        bookname:    body.bookname,
-        author:      body.author,
-        publisher:   body.publisher,
-        state:       body.state,
-        issuedate:   body.issuedate,
-        getdate:     body.getdate,
-        readdate:    body.readdate,
-        ownership:   body.ownership,
-        purchase:    body.purchase,
-        library:     body.library,
-        overview:    body.overview,
-        impressions: body.impressions,
+        where: {
+          isbn13:      body.targetId
+        },
+        data: {
+          isbn10:      body.isbn10,
+          genre:       body.genre,
+          bookname:    body.bookname,
+          author:      body.author,
+          publisher:   body.publisher,
+          state:       body.state,
+          issuedate:   body.issuedate,
+          getdate:     body.getdate,
+          readdate:    body.readdate,
+          ownership:   body.ownership,
+          purchase:    body.purchase,
+          library:     body.library,
+          overview:    body.overview,
+          impressions: body.impressions,
+        },
       });
     }
     return temp;
