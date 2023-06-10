@@ -1,5 +1,5 @@
 <template>
-  <p class="mb-5">読書履歴</p>
+  <p class="mb-5">読書履歴&nbsp;&nbsp;&nbsp;&nbsp;<v-btn nuxt :to="`../book/inpBook`" color="success">登録</v-btn></p>
   <div style="height:480px; overflow-y:scroll;">
     <table>
       <thead>
