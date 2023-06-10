@@ -6,7 +6,7 @@ export default defineEventHandler(async (e) => {
   const method = e.req.method;
 
   if (method === 'GET') {
-    // console.log(method);
+    console.log(method);
     const booklog = await prisma.booklog.findMany({
       orderBy: { issuedate: 'desc' },
     });
@@ -35,7 +35,21 @@ export default defineEventHandler(async (e) => {
       }
       if (body.mode === 'create') {
         temp = await prisma.booklog.create({
-          data: body.data,
+          isbn13:      body.isbn13,
+          isbn10:      body.isbn10,
+          genre:       body.genre,
+          bookname:    body.bookname,
+          author:      body.author,
+          publisher:   body.publisher,
+          state:       body.state,
+          issuedate:   body.issuedate,
+          getdate:     body.getdate,
+          readdate:    body.readdate,
+          ownership:   body.ownership,
+          purchase:    body.purchase,
+          library:     body.library,
+          overview:    body.overview,
+          impressions: body.impressions,
         });
       }
     } catch (error) {
@@ -61,8 +75,21 @@ export default defineEventHandler(async (e) => {
     let temp = {};
     if (body.mode === 'update') {
       temp = await prisma.booklog.update({
-        where: { isbn13: body.isbn13 },
-        data: body.data,
+        where:     { isbn13: body.targetId },
+        isbn10:      body.isbn10,
+        genre:       body.genre,
+        bookname:    body.bookname,
+        author:      body.author,
+        publisher:   body.publisher,
+        state:       body.state,
+        issuedate:   body.issuedate,
+        getdate:     body.getdate,
+        readdate:    body.readdate,
+        ownership:   body.ownership,
+        purchase:    body.purchase,
+        library:     body.library,
+        overview:    body.overview,
+        impressions: body.impressions,
       });
     }
     return temp;
@@ -83,7 +110,7 @@ export default defineEventHandler(async (e) => {
     let temp = {};
     if (body.mode === 'delete') {
       temp = await prisma.booklog.delete({
-        where: { isbn13: body.isbn13 },
+        where: { isbn13: body.targetId },
       });
     }
 
