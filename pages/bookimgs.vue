@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row dense class="toc-view" width="100%" max-height="290">
+    <v-row dense class="toc-view" width="100%">
       <v-col
         v-for="(book, i) in books"
         :key="i"
@@ -13,8 +13,8 @@
           height="90%"
         >
           <v-card-actions class="mb-5">
-            <NuxtLink event="" :to="`/book/${book.isbn13}`" @click.native="onClick">
-              <img width="150" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" alt="`${book.isbn13}`" />
+            <NuxtLink :to="`/book/${book.isbn13}`">
+              <img width="150" event="" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" alt="`${book.isbn13}`" />
             </NuxtLink>
           </v-card-actions>
         </v-card>
@@ -36,7 +36,7 @@
   margin-left: 1rem;
   position: sticky;
   top: 1rem;
-  max-height: 75vh;
+  max-height: 80vh;
   overflow: scroll;
 }
 </style>
