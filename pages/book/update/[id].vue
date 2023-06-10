@@ -124,7 +124,7 @@
 <script setup>
   const route = useRoute();
   const id = route.params.id;
-  const { data: book, pending, refresh } = useFetch('/api/booklog', {
+    const { data: book, pending, refresh } = useFetch('/api/booklog', {
     method: 'POST',
     body: { mode: 'find', isbn13: id },
     async onResponse({ request, response, options }) {
@@ -168,30 +168,32 @@
     input.impressions.value = book.value.impressions;
   });
   const updBook = () => {
-    window.confirm('更新機能は未実装：' + input.author);
- // const data = useFetch('/api/booklog', {
- //   method: 'PUT',                       // ※PUTであることに注意
- //   body: { mode:        'update',
- //           targetId:    id,
- //           isbn10:      input.isbn10,
- //           genre:       input.genre,
- //           bookname:    input.bookname,
- //           author:      input.author,
- //           publisher:   input.publisher,
- //           state:       input.state,
- //           issuedate:   input.issuedate,
- //           getdate:     input.getdate,
- //           readdate:    input.readdate,
- //           ownership:   input.ownership,
- //           purchase:    input.purchase,
- //           library:     input.library,
- //           overview:    input.overview,
- //           impressions: input.impressions,
- //         },
- // });
- // await refreshNuxtData(); // データのリフレッシュ
- // alert('更新されました：' + id);
- // return data;             // awaitしてるので何か返してあげる
+    const result = window.confirm('更新しますか？：' + input.bookname);
+    if( result ) {
+    // const data = useFetch('/api/booklog', {
+    //   method: 'PUT',                       // ※PUTであることに注意
+    //   body: { mode:        'update',
+    //           targetId:    id,
+    //           isbn10:      input.isbn10,
+    //           genre:       input.genre,
+    //           bookname:    input.bookname,
+    //           author:      input.author,
+    //           publisher:   input.publisher,
+    //           state:       input.state,
+    //           issuedate:   input.issuedate,
+    //           getdate:     input.getdate,
+    //           readdate:    input.readdate,
+    //           ownership:   input.ownership,
+    //           purchase:    input.purchase,
+    //           library:     input.library,
+    //           overview:    input.overview,
+    //           impressions: input.impressions,
+    //         },
+    // });
+    // await refreshNuxtData(); // データのリフレッシュ
+       alert('更新機能は未実装：' + id);
+    // return data;             // awaitしてるので何か返してあげる
+    }
   };
 </script>
 
