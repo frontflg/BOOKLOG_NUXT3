@@ -1,146 +1,58 @@
 <template>
-  <div v-if="pending">
-    Loading ...
-  </div>
-  <div v-else>
-    <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;
-      <v-btn @click="refresh">再読込</v-btn>&nbsp;&nbsp;
-      <v-btn nuxt :to="`../${book.isbn13}`" color="secondary">戻る</v-btn>&nbsp;&nbsp;
-      <v-btn v-on:click="updBook" color="warning">更新</v-btn></p>
-    <table>
-      <tr height="40px">
-        <th width="75">ISBN13</th><td width="160">&nbsp;&nbsp;&nbsp;{{ book.isbn13 }}</td>
-        <th width="75">ISBN10</th>
-        <td width="170">
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.isbn10" :label="`${book.isbn10}`">
-          </v-text-field>
-        </td>
-        <th width="75">分　類</th>
-        <td width="250">
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.genre" :label="`${book.genre}`">
-          </v-text-field>
-        </td>
-        <th width="300">表　紙</th>
-      </tr>
-      <tr height="40px">
-        <th>書　名</th>
-        <td colspan="5">
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.bookname" :label="`${book.bookname}`">
-          </v-text-field>
-        </td>
-        <td rowspan="7" align="center" style="padding: 10px;">
-          <v-img max-height="500" max-width="350" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" />
-        </td>
-      </tr>
-      <tr height="40px">
-        <th>著　者</th>
-        <td colspan="5">
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.author" :label="`${book.author}`">
-          </v-text-field>
-        </td>
-      </tr>
-      <tr height="40px">
-        <th>出版社</th>
-        <td colspan="3">
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.publisher" :label="`${book.publisher}`">
-          </v-text-field>
-        </td>
-        <th>状　態</th>
-        <td>
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.state" :label="`${book.state}`">
-          </v-text-field>
-        </td>
-      </tr>
-      <tr height="40px">
-        <th>発行日</th>
-        <td>
-          <div v-if="`${book.issuedate}` !== null">
-            <v-text-field clearable density="compact" hide-details="auto" v-model="input.issuedate" :label="`${book.issuedate}`.slice(0,10)"></v-text-field>
-          </div>
-            <div v-else>
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.issuedate"></v-text-field>
-          </div>
-        </td>
-        <th>取得日</th>
-        <td>
-          <div v-if="`${book.getdate}` !== null">
-            <v-text-field clearable density="compact" hide-details="auto" v-model="input.getdate" :label="`${book.getdate}`.slice(0,10)"></v-text-field>
-          </div>
-          <div v-else>
-            <v-text-field clearable density="compact" hide-details="auto" v-model="input.getdate"></v-text-field>
-          </div>
-        </td>
-        <th>読了日</th>
-        <td>
-          <div v-if="`${book.readdate}` !== null">
-            <v-text-field clearable density="compact" hide-details="auto" v-model="input.readdate" :label="`${book.readdate}`.slice(0,10)"></v-text-field>
-          </div>
-          <div v-else>
-            <v-text-field clearable density="compact" hide-details="auto" v-model="input.readdate"></v-text-field>
-          </div>
-        </td>
-      </tr>
-      <tr height="40px">
-        <th>所　有</th>
-        <td>
-          <div v-if="`${book.ownership}` == 1" style="padding-left: 20px;">
-            <v-checkbox density="compact" v-model="input.ownership" color="indigo" :label="`&nbsp;&nbsp;所有：${book.ownership}`" v-bind:true-value="1" hide-details></v-checkbox>
-          </div>
-          <div v-else style="padding-left: 20px;">
-            <v-checkbox density="compact" v-model="input.ownership" color="indigo" :label="`&nbsp;&nbsp;非所有：${book.ownership}`" v-bind:true-value="1" hide-details></v-checkbox>
-          </div>
-        </td>
-        <th>価　格</th>
-        <td>
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.purchase" :label="`${book.purchase}`" prefix="\">
-          </v-text-field>
-        </td>
-        <th>取得元</th>
-        <td>
-          <v-text-field clearable density="compact" hide-details="auto" v-model="input.library" :label="`${book.library}`">
-          </v-text-field>
-        </td>
-      </tr>
-      <tr height="40px">
-        <th>概　要</th>
-        <td colspan="5">
-          <v-text-field clearable hide-details="auto" v-model="input.overview" :label="`${book.overview}`">
-          </v-text-field>
-        </td>
-      </tr>
-      <tr height="120px">
-        <th>感　想</th>
-        <td colspan="5">
-          <v-textarea clearable density="compact" hide-details="auto" outlined="false"
-            v-model="input.impressions" :label="`${book.impressions}`"
-          >
-          </v-textarea>
-        </td>
-      </tr>
-    </table>
-  </div>
+  <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;
+    <v-btn @click="refresh">再読込</v-btn>&nbsp;&nbsp;
+    <v-btn nuxt :to="`../${book.isbn13}`" color="secondary">戻る</v-btn>&nbsp;&nbsp;
+    <v-btn v-on:click="updBook" color="error">変更</v-btn>
+  </p>
+  <table width="1000">
+    <tr><th width="75">ISBN13</th><td width="425">&nbsp;{{ book.isbn13 }}</td><th width="500">変更入力</th></tr>
+    <tr><th>ISBN10</th><td>&nbsp;{{ book.isbn10 }}</td>
+        <td><input type="text" v-model="inp.isbn10" maxlength="10" /></td></tr>
+    <tr><th>書　名</th><td>&nbsp;{{ book.bookname }}</td>
+        <td><input type="text" v-model="inp.bookname" maxlength="50" size="50" /></td></tr>
+    <tr><th>著　者</th><td>&nbsp;{{ book.author }}</td>
+        <td><input type="text" v-model="inp.author" maxlength="25" size="40" /></td></tr>
+    <tr><th>出版社</th><td>&nbsp;{{ book.publisher }}</td>
+        <td><input type="text" v-model="inp.publisher" maxlength="25" size="25" /></td></tr>
+    <tr><th>分　類</th><td>&nbsp;{{ book.genre }}</td>
+        <td><input type="text" v-model="inp.genre" maxlength="25" size="25" /></td></tr>
+    <tr><th>発行日</th><td><div v-if="book.issuedate !== null">&nbsp;{{ book.issuedate.slice(0,10) }}</div></td>
+        <td><input type="date" v-model="inp.issuedate" /></td></tr>
+    <tr><th>取得日</th><td><div v-if="book.getdate !== null">&nbsp;{{ book.getdate.slice(0,10) }}</div></td>
+        <td><input type="date" v-model="inp.getdate" /></td></tr>
+    <tr><th>読了日</th><td><div v-if="book.readdate !== null">&nbsp;{{ book.readdate.slice(0,10) }}</div></td>
+        <td><input type="date" v-model="inp.readdate" /></td></tr>
+    <tr><th>所　有</th><td><div v-if="book.ownership == '1'">&nbsp;所有</div></td>
+        <td><select v-model="inp.ownership">
+              <option value=0 >非所有</option>
+              <option value=1 >所有</option>
+            </select></td></tr>
+    <tr><th>価　格</th><td><div v-if="book.purchase == 0">&nbsp;図書館</div><div v-if="book.purchase !== 0">&nbsp;\{{ book.purchase }}-</div></td>
+        <td><input type="number" v-model="inp.purchase" /></td></tr>
+    <tr><th>取得元</th><td>&nbsp;{{ book.library }}</td>
+        <td><input type="text" v-model="inp.library" maxlength="25" size="25" /></td></tr>
+    <tr><th>概　要</th><td>&nbsp;{{ book.overview }}</td>
+        <td><textarea v-model="inp.overview" rows="3" cols="52" maxlength="255" /></td></tr>
+    <tr><th>感　想</th><td>&nbsp;{{ book.impressions }}</td>
+        <td><input type="text" v-model="inp.impressions" size="50" /></td></tr>
+    <tr><th>状　態</th><td>&nbsp;{{ book.state }}</td>
+        <td><input type="text" v-model="inp.state" maxlength="10" size="10" /></td></tr>
+  </table>
 </template>
 
 <script setup>
   const route = useRoute();
   const id = route.params.id;
-    const { data: book, pending, refresh } = useFetch('/api/booklog', {
+  const { data: book, refresh } = useLazyFetch('/api/booklog', {
     method: 'POST',
     body: { mode: 'find', isbn13: id },
-    async onResponse({ request, response, options }) {
-      console.log('[fetch response]', request, response.status)
-      for (const header of response.headers.entries()) {
-        console.log('HEADER', header)
-      }
-    },
   });
-  const input = ref({
+  const inp = ({
     isbn10:      '',
-    genre:       '',
     bookname:    '',
     author:      '',
     publisher:   '',
-    state:       '',
+    genre:       '',
     issuedate:   '',
     getdate:     '',
     readdate:    '',
@@ -149,50 +61,54 @@
     library:     '',
     overview:    '',
     impressions: '',
+    state:       '',
   });
-  // 非同期検索の取得値がセット出来ない(タイミング)
-  watchEffect(book, () => {
-    input.isbn10.value      = book.value.isbn10;
-    input.genre.value       = book.value.genre;
-    input.bookname.value    = book.value.bookname;
-    input.author.value      = book.value.author;
-    input.publisher.value   = book.value.publisher;
-    input.state.value       = book.value.state;
-    input.issuedate.value   = book.value.issuedate;
-    input.getdate.value     = book.value.getdate;
-    input.readdate.value    = book.value.readdate;
-    input.ownership.value   = book.value.ownership;
-    input.purchase.value    = book.value.purchase;
-    input.library.value     = book.value.library;
-    input.overview.value    = book.value.overview;
-    input.impressions.value = book.value.impressions;
-  });
+  if (book.value !== null ) {
+    inp.isbn10      = book.value.isbn10;
+    inp.bookname    = book.value.bookname;
+    inp.author      = book.value.author;
+    inp.publisher   = book.value.publisher;
+    inp.genre       = book.value.genre;
+    inp.issuedate   = book.value.issuedate.slice(0,10);
+    inp.getdate     = book.value.getdate.slice(0,10);
+    inp.readdate    = book.value.readdate.slice(0,10);
+    inp.ownership   = book.value.ownership;
+    inp.purchase    = book.value.purchase;
+    inp.library     = book.value.library;
+    inp.overview    = book.value.overview;
+    inp.impressions = book.value.impressions;
+    inp.state       = book.value.state;
+    inp.coverimg    = book.value.coverimg;
+  }
   const updBook = () => {
-    const result = window.confirm('更新しますか？：' + input.bookname);
+    const result = window.confirm('更新しますか？：' + id);
     if( result ) {
-    // const data = useFetch('/api/booklog', {
-    //   method: 'PUT',                       // ※PUTであることに注意
-    //   body: { mode:        'update',
-    //           targetId:    id,
-    //           isbn10:      input.isbn10,
-    //           genre:       input.genre,
-    //           bookname:    input.bookname,
-    //           author:      input.author,
-    //           publisher:   input.publisher,
-    //           state:       input.state,
-    //           issuedate:   input.issuedate,
-    //           getdate:     input.getdate,
-    //           readdate:    input.readdate,
-    //           ownership:   input.ownership,
-    //           purchase:    input.purchase,
-    //           library:     input.library,
-    //           overview:    input.overview,
-    //           impressions: input.impressions,
-    //         },
-    // });
-    // await refreshNuxtData(); // データのリフレッシュ
-       alert('更新機能は未実装：' + id);
-    // return data;             // awaitしてるので何か返してあげる
+      const date_issuedate = new Date(inp.value.issuedate);
+      const date_getdate   = new Date(inp.value.getdate);
+      const date_readdate  = new Date(inp.value.readdate);
+      const data = useFetch('/api/booklog', {
+        method: 'PUT',          // ※PUT であることに注意
+        body: {
+          mode:        'update',
+          targetId:    id,
+          isbn10:      inp.value.isbn10,
+          genre:       inp.value.genre,
+          bookname:    inp.value.bookname,
+          author:      inp.value.author,
+          publisher:   inp.value.publisher,
+          state:       inp.value.state,
+          issuedate:   date_issuedate,
+          getdate:     date_getdate,
+          readdate:    date_readdate,
+          ownership:   parseInt(inp.value.ownership),
+          purchase:    parseInt(inp.value.purchase),
+          library:     inp.value.library,
+          overview:    inp.value.overview,
+          impressions: inp.value.impressions
+        },
+      })
+      alert('更新されました：' + id);
+      router.push('/booklog');
     }
   };
 </script>
@@ -201,4 +117,7 @@
   th{ color:#fff; background:#005ab3; position:sticky; top:0; }
   table tr:nth-child(odd){ background:#e6f2ff; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
+  input { border:none; outline: none; padding: 0 0 0 10px; }
+  textarea { border:none; outline: none; padding: 0 0 0 10px; }
+  select { border:none; outline: none; padding: 0 0 0 10px; }
 </style>
