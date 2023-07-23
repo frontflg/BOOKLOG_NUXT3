@@ -32,7 +32,7 @@
   const delBook = () => {
     const result = window.confirm('削除しますか？：' + id);
     if( result ) {
-      const data = useFetch('../booklog', {
+      const data = useFetch('/api/booklog', {
         method: 'DELETE',
         body: { mode: 'delete', targetId: id },
       })
