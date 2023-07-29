@@ -114,6 +114,10 @@
         },
       })
       alert('更新されました：' + id);
+      return navigateTo({
+        path: '/book/' + id,
+        query: { baz: 'programmatic-navigation' }
+      })
     }
   };
 </script>
