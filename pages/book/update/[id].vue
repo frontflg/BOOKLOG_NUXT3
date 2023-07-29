@@ -83,32 +83,31 @@
   const updBook = () => {
     const result = window.confirm('更新しますか？：' + id);
     if( result ) {
-      const date_issuedate = new Date(inp.value.issuedate);
-      const date_getdate   = new Date(inp.value.getdate);
-      const date_readdate  = new Date(inp.value.readdate);
-      const data = useFetch('/api/booklog', {
+      const date_issuedate = new Date(inp.issuedate);
+      const date_getdate   = new Date(inp.getdate);
+      const date_readdate  = new Date(inp.readdate);
+      const { data, refresh } = useFetch('/api/booklog', {
         method: 'PUT',          // ※PUT であることに注意
         body: {
           mode:        'update',
-          targetId:    id,
-          isbn10:      inp.value.isbn10,
-          genre:       inp.value.genre,
-          bookname:    inp.value.bookname,
-          author:      inp.value.author,
-          publisher:   inp.value.publisher,
-          state:       inp.value.state,
+          isbn13:      id,
+          isbn10:      inp.isbn10,
+          genre:       inp.genre,
+          bookname:    inp.bookname,
+          author:      inp.author,
+          publisher:   inp.publisher,
+          state:       inp.state,
           issuedate:   date_issuedate,
           getdate:     date_getdate,
           readdate:    date_readdate,
-          ownership:   parseInt(inp.value.ownership),
-          purchase:    parseInt(inp.value.purchase),
-          library:     inp.value.library,
-          overview:    inp.value.overview,
-          impressions: inp.value.impressions
+          ownership:   parseInt(inp.ownership),
+          purchase:    parseInt(inp.purchase),
+          library:     inp.library,
+          overview:    inp.overview,
+          impressions: inp.impressions
         },
       })
       alert('更新されました：' + id);
-      router.push('/booklog');
     }
   };
 </script>
