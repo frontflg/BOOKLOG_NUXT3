@@ -37,7 +37,10 @@
         body: { mode: 'delete', targetId: id },
       })
       alert('削除されました：' + id);
-      router.push('/booklog');
+      return navigateTo({
+        path: '/booklog,
+        query: { baz: 'programmatic-navigation' }
+      })
     }
   };
 </script>
