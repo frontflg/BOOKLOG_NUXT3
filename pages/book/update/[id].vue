@@ -63,15 +63,17 @@
     impressions: '',
     state:       '',
   });
-  // 前回検索値をクリアできないので、再度、呼び出し画面に画面遷移させている（酷いコード）
-  if ( book.value.isbn13 !== id ) {
-    const result = window.confirm('再度変更ボタンをクリックして下さい！');
-    navigateTo({
-      path: '/book/' + id,
-      query: { baz: 'programmatic-navigation' }
-    })
-  }
+
   if (book.value !== null ) {
+    // 前回検索値をクリアできないので、再度、呼び出し画面に画面遷移させている（酷いコード）
+    if ( book.value.isbn13 !== id ) {
+      const result = window.confirm('再度変更ボタンをクリックして下さい！');
+      navigateTo({
+        path: '/book/' + id,
+        query: { baz: 'programmatic-navigation' }
+      })
+    }
+
     inp.isbn10      = book.value.isbn10;
     inp.bookname    = book.value.bookname;
     inp.author      = book.value.author;
@@ -134,7 +136,7 @@
   th { color:#fff; background:#005ab3; position:sticky; top:0; }
   table tr:nth-child(odd) { background:#e6f2ff; vertical-align: top; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
-  input { border:none; outline: none; padding: 0 0 0 10px; }
-  textarea { border:none; outline: none; padding: 0 0 0 10px; }
+  input { border:none; outline: none; padding: 0 0 0 10px; vertical-align: top; }
+  textarea { border:none; outline: none; padding: 0 0 0 10px; vertical-align: top; }
   select { border:none; outline: none; padding: 0 0 0 10px; }
 </style>
