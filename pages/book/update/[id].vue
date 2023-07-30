@@ -131,8 +131,8 @@
 </script>
 
 <style>
-  th{ color:#fff; background:#005ab3; position:sticky; top:0; }
-  table tr:nth-child(odd){ background:#e6f2ff; }
+  th { color:#fff; background:#005ab3; position:sticky; top:0; }
+  table tr:nth-child(odd) { background:#e6f2ff; vertical-align: top; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
   input { border:none; outline: none; padding: 0 0 0 10px; }
   textarea { border:none; outline: none; padding: 0 0 0 10px; }
