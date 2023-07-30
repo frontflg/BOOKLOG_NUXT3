@@ -63,6 +63,14 @@
     impressions: '',
     state:       '',
   });
+  // 前回検索値をクリアできないので、再度、呼び出し画面に画面遷移させている（酷いコード）
+  if ( book.value.isbn13 !== id ) {
+    const result = window.confirm('再度変更ボタンをクリックして下さい！');
+    navigateTo({
+      path: '/book/' + id,
+      query: { baz: 'programmatic-navigation' }
+    })
+  }
   if (book.value !== null ) {
     inp.isbn10      = book.value.isbn10;
     inp.bookname    = book.value.bookname;
