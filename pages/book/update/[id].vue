@@ -1,7 +1,7 @@
 <template>
   <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;
     <v-btn @click="refresh">再読込</v-btn>&nbsp;&nbsp;
-    <v-btn nuxt :to="`../${book.isbn13}`" color="secondary">戻る</v-btn>&nbsp;&nbsp;
+    <v-btn nuxt :to="`/book/${book.isbn13}`" color="secondary">戻る</v-btn>&nbsp;&nbsp;
     <v-btn v-on:click="updBook" color="error">変更</v-btn>
   </p>
   <table width="1000">
@@ -67,11 +67,7 @@
   if (book.value !== null ) {
     // 前回検索値をクリアできないので、再度、呼び出し画面に画面遷移させている（酷いコード）
     if ( book.value.isbn13 !== id ) {
-      const result = window.confirm('再度変更ボタンをクリックして下さい！');
-      navigateTo({
-        path: '/book/' + id,
-        query: { baz: 'programmatic-navigation' }
-      })
+      location.reload();
     }
 
     inp.isbn10      = book.value.isbn10;
