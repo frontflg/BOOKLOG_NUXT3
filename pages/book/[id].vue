@@ -1,6 +1,6 @@
 <template>
   <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;
-    <v-btn nuxt :to="`update/${book.isbn13}`" color="primary">変更</v-btn>&nbsp;&nbsp;
+    <v-btn nuxt :to="`/update/${book.isbn13}`" color="primary">変更</v-btn>&nbsp;&nbsp;
     <v-btn v-on:click="delBook" color="error">削除</v-btn>&nbsp;&nbsp;
     <v-btn nuxt :to="`/booklog`" color="secondary">一覧へ</v-btn>&nbsp;
     <v-btn nuxt :to="`/bookimgs`" color="secondary">表紙へ</v-btn></p>
