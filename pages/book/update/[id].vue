@@ -78,13 +78,13 @@
     inp.publisher   = book.value.publisher;
     inp.genre       = book.value.genre;
     if ( book.value.issuedate !== null ) {
-      inp.issuedate   = book.value.issuedate.slice(0,10);
+      inp.issuedate = book.value.issuedate.slice(0,10);
     }
     if ( book.value.getdate !== null ) {
-      inp.getdate     = book.value.getdate.slice(0,10);
+      inp.getdate   = book.value.getdate.slice(0,10);
     }
     if ( book.value.readdate !== null ) {
-      inp.readdate    = book.value.readdate.slice(0,10);
+      inp.readdate  = book.value.readdate.slice(0,10);
     }
     inp.ownership   = book.value.ownership;
     inp.purchase    = book.value.purchase;
@@ -94,7 +94,11 @@
     inp.state       = book.value.state;
     inp.coverimg    = book.value.coverimg;
   }
-  const goBack = () => {
+  const refresh = () => {
+    isVisible = false;
+    location.reload();
+  }
+    const goBack = () => {
     const result = window.confirm('詳細ページに戻ります：' + id);
     return navigateTo({
       path: '/book/' + id,
