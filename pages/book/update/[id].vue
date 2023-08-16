@@ -1,7 +1,7 @@
 <template>
   <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;
-    <v-btn @click="refresh">再読込</v-btn>&nbsp;&nbsp;
-    <v-btn @click="goBack" color="secondary">戻る</v-btn>&nbsp;&nbsp;
+    <v-btn @click.native="refresh">再読込</v-btn>&nbsp;&nbsp;
+    <v-btn nuxt :to="`/booklog`" color="secondary" onclick="onClick">戻る</v-btn>&nbsp;&nbsp;
     <v-btn v-on:click="updBook" color="error">変更</v-btn>
   </p>
   <div v-show="isVisible">
@@ -98,13 +98,7 @@
     isVisible = false;
     location.reload();
   }
-    const goBack = () => {
-    const result = window.confirm('詳細ページに戻ります：' + id);
-    return navigateTo({
-      path: '/book/' + id,
-      query: { baz: 'programmatic-navigation' }
-    })
-  }
+  const onClick = () => alert('一覧ページに遷移します');
   const updBook = () => {
     const result = window.confirm('更新しますか？：' + id);
     if( result ) {
