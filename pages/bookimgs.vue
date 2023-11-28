@@ -13,9 +13,9 @@
           height="90%"
         >
           <v-card-actions class="mb-5">
-            <NuxtLink :to="`/book/${book.isbn13}`" @click.enter>
+            <a :href="`/book/${book.isbn13}`" @click.enter>
               <img width="150" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" alt="`${book.isbn13}`" />
-            </NuxtLink>
+            </a>
           </v-card-actions>
         </v-card>
       </v-col>
