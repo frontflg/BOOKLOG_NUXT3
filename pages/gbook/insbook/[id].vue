@@ -153,7 +153,7 @@
       const inpAuthor = ( inp.value.author1 ? inp.value.author1 : '' )
                       + ( inp.value.author2 ? ',' + inp.value.author2 : '' )
                       + ( inp.value.author3 ? ',' + inp.value.author3 : '' );
-      const { data, refresh } = useFetch('/api/booklog', {
+      const { data, error, refresh } = useFetch('/api/booklog', {
         method: 'POST',          // ※POST であることに注意
         body: { 
           mode:        'create',
@@ -174,7 +174,11 @@
           state:       inp.value.state
         },
       });
-      alert('登録しました：' + inp.value.isbn13);
+      if (error.value) {
+        alert('登録エラー:' + error.value);
+      } else {
+        alert('登録しました：' + inp.value.isbn13);
+      }
       return data;             // awaitしてるので何か返してあげる
     } else {
       alert('キャンセルしました！');
