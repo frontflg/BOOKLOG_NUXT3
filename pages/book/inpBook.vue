@@ -122,7 +122,7 @@
       const date_issuedate = new Date(inp.value.issuedate);
       const date_getdate   = new Date(inp.value.getdate);
       const date_readdate  = new Date(inp.value.readdate);
-      const { data, refresh } = useFetch('/api/booklog', {
+      const { data, error, refresh } = useFetch('/api/booklog', {
         method: 'POST',          // ※POST であることに注意
         body: { 
           mode:        'create',
@@ -143,7 +143,11 @@
           impressions: inp.value.impressions
         },
       });
-      alert('登録しました：' + inp.value.isbn13);
+      if (error.value) {
+        alert('登録エラー:' + error.value);
+      } else {
+        alert('登録しました：' + inp.value.isbn13);
+      }
       return data;             // awaitしてるので何か返してあげる
     }
   };
