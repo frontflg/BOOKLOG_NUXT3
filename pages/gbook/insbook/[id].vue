@@ -1,8 +1,9 @@
 <template>
   <div style="height:480px;">
     <p class="mb-10">書籍登録&nbsp;&nbsp;
-    <v-btn nuxt :to="`../booklog`" color="secondary">戻る</v-btn>&nbsp;&nbsp;
-    <v-btn v-on:click="inpBook" color="warning">登録</v-btn></p>
+      <v-btn nuxt :to="`../../booklog`" color="secondary">戻る</v-btn>&nbsp;&nbsp;
+      <v-btn v-on:click="inpBook" color="warning">登録</v-btn>
+    </p>
     <form>
     <table>
       <tr>
@@ -24,7 +25,11 @@
         <td colspan="5">&nbsp;{{ book.items[0].volumeInfo.title }}
         </td>
         <td rowspan="14" align="center">&nbsp;
-          <img height="300" event="" :src="`${book.items[0].volumeInfo.imageLinks.smallThumbnail}`" alt="`${id}`" />&nbsp;
+          <template v-if="book.items[0].volumeInfo.imageLinks">
+            <img height="300" event="" :src="`${book.items[0].volumeInfo.imageLinks.Thumbnail}`" alt="`${id}`" />&nbsp;
+          </template>
+          <template v-else>NO IMEGE
+          </template>
         </td>
       </tr>
       <tr>
@@ -135,7 +140,7 @@
     readdate:    new Date().toISOString().substring(0, 10),
     ownership:   '',
     library:     '',
-    overview:    '',
+    overview:    book.value.items[0].volumeInfo.description ? book.value.items[0].volumeInfo.description : '',
     impressions: '',
     state:       '',
   });
