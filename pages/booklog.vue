@@ -1,5 +1,15 @@
 <template>
-  <p class="mb-5">読書履歴&nbsp;&nbsp;&nbsp;&nbsp;<v-btn nuxt :to="`/book/inpBook`" color="success">登録</v-btn></p>
+  <form>
+    <div class="d-flex flex-row">
+      <p class="mb-5">読書履歴&nbsp;&nbsp;&nbsp;
+        <v-btn nuxt :to="`/book/inpBook`" color="success">登録</v-btn></p>
+      <p>&nbsp;&nbsp;&nbsp;</p>
+      <p align="right" >書名検索&nbsp;&nbsp;
+        <input v-model="skey" size="30">&nbsp;
+        <v-btn nuxt :to="`/gbook/${ skey }`" color="secondary">検索</v-btn>
+      </p>
+    </div>
+  </form>
   <div style="height:480px; overflow-y:scroll;">
     <table>
       <thead>
@@ -34,6 +44,7 @@
 
 <script setup>
   const book = ref('');
+  const skey = ref('');
   const { data: books, refresh } = useFetch('/api/booklog');
 </script>
 
@@ -41,4 +52,5 @@
   th{ color:#fff; background:#005ab3; position:sticky; top:0; }
   table tr:nth-child(odd){ background:#e6f2ff; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
+  input { outline: solid 2px #005ab3; }
 </style>
