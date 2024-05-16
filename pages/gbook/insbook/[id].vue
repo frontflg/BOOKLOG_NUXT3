@@ -26,7 +26,7 @@
         </td>
         <td rowspan="14" align="center">&nbsp;
           <template v-if="book.items[0].volumeInfo.imageLinks">
-            <img height="300" event="" :src="`${book.items[0].volumeInfo.imageLinks.Thumbnail}`" alt="`${id}`" />&nbsp;
+            <img height="300" event="" :src="`${book.items[0].volumeInfo.imageLinks.thumbnail}`" alt="`${id}`" />&nbsp;
           </template>
           <template v-else>NO IMEGE
           </template>
@@ -169,7 +169,7 @@
           ownership:   parseInt(inp.value.ownership),
           purchase:    inp.value.purchase ? parseInt(inp.value.purchase) : 0,
           library:     inp.value.library,
-          overview:    inp.value.overview,
+          overview:    inp.value.overview ? inp.value.overview.slice(0,254) : '',
           impressions: inp.value.impressions,
           state:       inp.value.state
         },
