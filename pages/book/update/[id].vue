@@ -105,7 +105,7 @@
       const date_issuedate = new Date(inp.issuedate);
       const date_getdate   = new Date(inp.getdate);
       const date_readdate  = new Date(inp.readdate);
-      const { data, refresh } = useFetch('/api/booklog', {
+      const { data, error, refresh } = useFetch('/api/booklog', {
         method: 'PUT',          // ※PUT であることに注意
         body: {
           mode:        'update',
@@ -126,7 +126,11 @@
           impressions: inp.impressions
         },
       })
-      alert('更新されました：' + id);
+      if (error.value) {
+        alert('更新エラー:' + error.value);
+      } else {
+        alert('更新されました：' + id);
+      }
       return navigateTo({
         path: '/book/' + id,
         query: { baz: 'programmatic-navigation' }
