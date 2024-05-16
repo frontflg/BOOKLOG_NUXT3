@@ -34,11 +34,15 @@
   const delBook = () => {
     const result = window.confirm('削除しますか？：' + id);
     if( result ) {
-      const data = useFetch('/api/booklog', {
+      const { data, error } = useFetch('/api/booklog', {
         method: 'DELETE',
         body: { mode: 'delete', targetId: id },
       })
-      alert('削除されました：' + id);
+      if (error.value) {
+        alert('削除エラー:' + error.value);
+      } else {
+        alert('削除されました：' + id);
+      }
       return navigateTo({
         path: '/booklog,
         query: { baz: 'programmatic-navigation' }
