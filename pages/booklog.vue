@@ -1,15 +1,20 @@
 <template>
-  <form>
-    <div class="d-flex flex-row">
-      <p class="mb-5">読書履歴&nbsp;&nbsp;&nbsp;
-        <v-btn nuxt :to="`/book/inpBook`" color="success">登録</v-btn></p>
-      <p>&nbsp;&nbsp;&nbsp;</p>
-      <p align="right" >書名検索&nbsp;&nbsp;
-        <input v-model="skey" size="30">&nbsp;
-        <v-btn nuxt :to="`/gbook/${ skey }`" color="secondary">検索</v-btn>
-      </p>
-    </div>
-  </form>
+    <form>
+      <div class="d-flex flex-row">
+        <p class="mb-5">読書履歴&nbsp;&nbsp;&nbsp;
+          <v-btn nuxt :to="`/book/inpBook`" color="success">登録</v-btn></p>
+        <p>&nbsp;&nbsp;&nbsp;</p>
+        <p align="right">書名検索&nbsp;&nbsp;
+          <input v-model="skey" size="30">&nbsp;
+          <template v-if="skey">
+            <v-btn nuxt :to="`/gbook/${ skey }`" color="secondary">検索</v-btn>
+          </template>
+          <template v-else>
+            <v-btn disabled>検索</v-btn>
+          </template>
+        </p>
+      </div>
+    </form>
   <div style="height:480px; overflow-y:scroll;">
     <table>
       <thead>
@@ -26,7 +31,7 @@
       <tbody>
         <tr v-for="(book,i) in books" :key="book.isbn13">
           <td align="right">{{ i + 1 }}&nbsp;</td>
-          <td><a :href="`/book/${book.isbn13}`" @click.enter>&nbsp;{{ book.isbn13 }}</a>&nbsp;</td>
+          <td>&nbsp;<a :href="`/book/${book.isbn13}`">{{ book.isbn13 }}</a>&nbsp;</td>
           <td>{{ book.bookname }}</td>
           <td>{{ book.author }}</td>
           <td>{{ book.publisher }}</td>
@@ -45,12 +50,12 @@
 <script setup>
   const book = ref('');
   const skey = ref('');
-  const { data: books, refresh } = useFetch('/api/booklog');
+  const { data: books, refresh } = await useFetch('/api/booklog');
 </script>
 
 <style>
   th{ color:#fff; background:#005ab3; position:sticky; top:0; }
   table tr:nth-child(odd){ background:#e6f2ff; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
-  input { outline: solid 2px #005ab3; }
+  input { outline: solid 2px #808080; vertical-align: middle; }
 </style>
