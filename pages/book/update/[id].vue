@@ -38,6 +38,8 @@
         <td><input type="text" v-model="inp.impressions" size="50" /></td></tr>
       <tr><th>状　態</th><td>&nbsp;{{ book.state }}</td>
         <td><input type="text" v-model="inp.state" maxlength="10" size="10" /></td></tr>
+      <tr><th>画像FL</th><td>&nbsp;{{ book.coverimg }}</td>
+        <td><input type="text" v-model="inp.coverimg" size="50" /></td></tr>
     </table>
   </div>
 </template>
@@ -65,6 +67,7 @@
     overview:    '',
     impressions: '',
     state:       '',
+    coverimg:    '',
   });
   if (book.value !== null ) {
     // 前回検索値をクリアできないので、再度画面遷移させている（酷いコード）
@@ -123,7 +126,8 @@
           purchase:    parseInt(inp.purchase),
           library:     inp.library,
           overview:    inp.overview,
-          impressions: inp.impressions
+          impressions: inp.impressions,
+          coverimg:    inp.coverimg
         },
       })
       if (error.value) {
