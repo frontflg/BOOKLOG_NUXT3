@@ -7,7 +7,14 @@
   <table>
     <tr><th width="75">ISBN13</th><td width="600">&nbsp;{{ book.isbn13 }}</td><th width="300">表　紙</th></tr>
     <tr><th>ISBN10</th><td>&nbsp;{{ book.isbn10 }}</td>
-        <td rowspan="14" align="center"><v-img max-height="500" max-width="300" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" /></td></tr>
+      <td rowspan="14" align="center">
+        <template v-if="book.coverimg">
+          <v-img max-height="500" max-width="300" :src="`/${book.coverimg}`" />
+        </template>
+        <template v-else>
+          <v-img max-height="500" max-width="300" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" />
+        </template>
+      </td></tr>
     <tr><th>書　名</th><td>&nbsp;{{ book.bookname }}</td></tr>
     <tr><th>著　者</th><td>&nbsp;{{ book.author }}</td></tr>
     <tr><th>出版社</th><td>&nbsp;{{ book.publisher }}</td></tr>
