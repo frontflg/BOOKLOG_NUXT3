@@ -7,7 +7,12 @@
       <p>&nbsp;&nbsp;&nbsp;</p>
       <p align="right">AMAZON検索&nbsp;&nbsp;
         <input v-model="AZkey" size="30">&nbsp;
-        <v-btn @click="redirectToPage" color="secondary">検索</v-btn>
+        <template v-if="AZkey">
+          <v-btn @click="redirectToPage" color="secondary">検索</v-btn>
+        </template>
+        <template v-else>
+          <v-btn disabled>検索</v-btn>
+        </template>
       </p>
     </div>
   </form>
@@ -89,6 +94,7 @@
   const redirectToPage = () => {
     const AZurl = 'https://www.amazon.co.jp/s?i=stripbooks&k=' + AZkey;
     window.open(AZurl, '_blank')
+    console.log("Amazon 検索ボタンがクリックされました！" );
   };
 </script>
 
@@ -96,5 +102,5 @@
   th{ color:#fff; background:#005ab3; position:sticky; top:0; }
   table tr:nth-child(odd){ background:#e6f2ff; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
-  input { outline: solid 2px #005ab3; }
+  input { outline: solid 2px #808080; vertical-align: middle; }
 </style>
