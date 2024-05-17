@@ -1,9 +1,11 @@
 <template>
   <p class="mb-10">読書履歴（{{ book.isbn13 }}）&nbsp;&nbsp;
-    <v-btn :href="`/update/${book.isbn13}`" color="primary" @click.enter>変更</v-btn>&nbsp;&nbsp;
+    <v-btn :href="`/book/update2/${book.isbn13}`" color="primary" @click.enter>変更</v-btn>&nbsp;&nbsp;
+    <!-- v-btn v-on:click="dispInp" color="success">表示</v-btn>&nbsp;&nbsp; -->
     <v-btn v-on:click="delBook" color="error">削除</v-btn>&nbsp;&nbsp;
-    <v-btn nuxt :to="`/booklog`" color="secondary">一覧へ</v-btn>&nbsp;
-    <v-btn nuxt :to="`/bookimgs`" color="secondary">表紙へ</v-btn></p>
+    <!-- v-btn nuxt :to="`/booklog`" color="secondary">一覧へ</v-btn>&nbsp;
+    <v-btn nuxt :to="`/bookimgs`" color="secondary">表紙へ</v-btn --></p>
+  <div style="height:480px;">
   <table>
     <tr><th width="75">ISBN13</th><td width="600">&nbsp;{{ book.isbn13 }}</td><th width="300">表　紙</th></tr>
     <tr><th>ISBN10</th><td>&nbsp;{{ book.isbn10 }}</td>
@@ -22,13 +24,17 @@
     <tr><th>発行日</th><td><div v-if="book.issuedate !== null">&nbsp;{{ book.issuedate.slice(0,10) }}</div></td></tr>
     <tr><th>取得日</th><td><div v-if="book.getdate !== null">&nbsp;{{ book.getdate.slice(0,10) }}</div></td></tr>
     <tr><th>読了日</th><td><div v-if="book.readdate !== null">&nbsp;{{ book.readdate.slice(0,10) }}</div></td></tr>
-    <tr><th>所　有</th><td><div v-if="book.ownership == '1'">&nbsp;所有</div></td></tr>
+    <tr><th>所　有</th><td>
+      <div v-if="book.ownership == '1'">&nbsp;所有</div>
+      <div v-else>&nbsp;非所有</div>
+    </td></tr>
     <tr><th>価　格</th><td><div v-if="book.purchase == 0">&nbsp;図書館</div><div v-if="book.purchase !== 0">&nbsp;\{{ book.purchase }}-</div></td></tr>
     <tr><th>取得元</th><td>&nbsp;{{ book.library }}</td></tr>
     <tr><th>概　要</th><td>&nbsp;{{ book.overview }}</td></tr>
     <tr><th>感　想</th><td>&nbsp;{{ book.impressions }}</td></tr>
     <tr><th>状　態</th><td>&nbsp;{{ book.state }}</td></tr>
   </table>
+  </div>
 </template>
 
 <script setup>
@@ -38,6 +44,11 @@
     method: 'POST',
     body: { mode: 'find', isbn13: id },
   });
+  const inp = ({
+    isbn10:   '',
+    bookname: '',
+  });
+  let isShow = true;
   const delBook = () => {
     const result = window.confirm('削除しますか？：' + id);
     if( result ) {
@@ -51,10 +62,16 @@
         alert('削除されました：' + id);
       }
       return navigateTo({
-        path: '/booklog,
+        path: '/booklog',
         query: { baz: 'programmatic-navigation' }
       })
     }
+  };
+  const dispInp = () => {
+    alert('表示されました：' + id);
+    isShow       = false;
+    inp.bookname = '書名は？'; //  book.value.bookname;
+    return;
   };
 </script>
 
@@ -63,3 +80,4 @@
   table tr:nth-child(odd){ background:#e6f2ff; }
   tbody { overflow-x: hidden; overflow-y: scroll; height: 100px; }
 </style>
+
