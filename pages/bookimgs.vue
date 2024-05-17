@@ -13,8 +13,13 @@
           height="90%"
         >
           <v-card-actions class="mb-5">
-            <a :href="`/book/${book.isbn13}`" @click.enter>
-              <img width="150" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" alt="`${book.isbn13}`" />
+            <a :href="`/book/${book.isbn13}`">
+              <template v-if="book.coverimg">
+                <img width="150" event="" :src="`/${book.coverimg}`" alt="`${book.isbn13}`" />
+              </template>
+              <template v-else>
+                <img width="150" event="" :src="`https://images-fe.ssl-images-amazon.com/images/P/${book.isbn10}.09.LZZZZZZZ`" alt="`${book.isbn13}`" />
+              </template>
             </a>
           </v-card-actions>
         </v-card>
@@ -40,3 +45,4 @@
   overflow: scroll;
 }
 </style>
+
